@@ -10,7 +10,18 @@ const usersApiController = require("../controllers/usersApi");
  * @description test users route
  * @access public
  */
-
 router.get("/test", usersApiController.test);
+
+/* @route POST api/users/register
+ * @description register users route
+ * @access public
+ */
+router.post("/register", usersApiController.register);
+
+/* @route POST api/users/login
+ * @description login users route
+ * @access public
+ */
+router.post("/login", usersApiController.login);
 
 module.exports = router;
