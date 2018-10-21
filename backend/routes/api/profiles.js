@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 // Profiles API controller
-const profilesApiController = require("../controllers/profilesApi");
+const profilesApiController = require("../controllers/profilesApiCtrl");
 
 /* @route GET api/profiles/test
  * @description test profiles route

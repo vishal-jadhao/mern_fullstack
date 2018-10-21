@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 // Posts API controller
-const postsApiController = require("../controllers/postsApi");
+const postsApiController = require("../controllers/postsApiCtrl");
 
 /* @route GET api/posts/test
  * @description test posts route
