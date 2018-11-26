@@ -13,6 +13,16 @@ const postsApiController = require("../controllers/postsApiCtrl");
  */
 router.get("/test", postsApiController.test);
 
+/* @route POST api/posts/
+ * @desc Create posts
+ * @access private
+ */
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  postsApiController.createPosts
+);
+
 /* @route GET api/posts/
  * @desc Get all posts
  * @access public
@@ -35,14 +45,44 @@ router.delete(
   postsApiController.deleteSinglePost
 );
 
-/* @route POST api/posts/
- * @desc Create posts
+/* @route POST api/posts/like/:id
+ * @desc Like the post
  * @access private
  */
 router.post(
-  "/",
+  "/like/:post_id",
   passport.authenticate("jwt", { session: false }),
-  postsApiController.createPosts
+  postsApiController.likePost
+);
+
+/* @route POST api/posts/unlike/:id
+ * @desc Unlike the post
+ * @access private
+ */
+router.post(
+  "/unlike/:post_id",
+  passport.authenticate("jwt", { session: false }),
+  postsApiController.unLikePost
+);
+
+/* @route POST api/posts/comment/:id
+ * @desc Add comment to post
+ * @access private
+ */
+router.post(
+  "/comment/:post_id",
+  passport.authenticate("jwt", { session: false }),
+  postsApiController.addComment
+);
+
+/* @route DELETE api/posts/comment/:id
+ * @desc Delete comment from post
+ * @access private
+ */
+router.delete(
+  "/comment/:post_id/:comment_id",
+  passport.authenticate("jwt", { session: false }),
+  postsApiController.deleteComment
 );
 
 module.exports = router;
