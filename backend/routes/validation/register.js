@@ -31,8 +31,16 @@ const validateRegisterInput = data => {
       "Password must be greater than 6 and less than 30 characters";
   }
 
+  if (!validator.equals(data.password, data.confirmPassword)) {
+    errors.confirmPassword = "Password and Confirm Password must be same";
+  }
+
   if (validator.isEmpty(data.password)) {
     errors.password = "Password is required";
+  }
+
+  if (validator.isEmpty(data.confirmPassword)) {
+    errors.confirmPassword = "Confirm Password is required";
   }
 
   return {
