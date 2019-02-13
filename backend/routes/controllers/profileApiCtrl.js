@@ -129,6 +129,7 @@ const profileApiController = {
    * @param {*} res
    */
   async createProfile(req, res) {
+    console.log(req.user.id);
     try {
       const { errors, isValid } = validateProfileInput(req.body);
       if (!isValid) {
@@ -174,7 +175,6 @@ const profileApiController = {
           });
         } else {
           // Create new profile
-
           // Check if handle exists
           Profile.findOne({ handle: profileFields.handle }).then(profile => {
             if (profile) {
@@ -225,8 +225,8 @@ const profileApiController = {
         });
       });
     } catch (error) {
-      res.status(403).send({
-        error: "Something went wrong please try again!"
+      res.status(403).json({
+        error: error
       });
     }
   },

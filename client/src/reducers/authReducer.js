@@ -1,3 +1,6 @@
+import { SET_CURRENT_USER } from "../actions/types";
+import isEmpty from "../utils/isEmpty";
+
 // This file contains auth reducer.
 
 const initialState = {
@@ -7,6 +10,12 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
     default:
       return state;
   }

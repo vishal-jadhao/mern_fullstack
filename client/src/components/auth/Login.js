@@ -26,8 +26,19 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    const { isAuthenticated } = this.props.auth;
+    if (isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+
+    if (this.props.errors !== nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
@@ -53,7 +64,7 @@ class Login extends Component {
                 <p>
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
                 </p>
-                <Form>
+                <Form onSubmit={this.submitHandler}>
                   <FormGroup>
                     <Label for="formEmail">
                       Email &nbsp;
@@ -83,7 +94,7 @@ class Login extends Component {
                     />
                   </FormGroup>
                   <div className="form-button">
-                    <Button onClick={this.submitHandler}>Login</Button>
+                    <Button>Login</Button>
                   </div>
                   <br />
                   <p>
@@ -93,6 +104,34 @@ class Login extends Component {
                 </Form>
               </Media>
             </Media>
+          </div>
+        </section>
+        <section className="container with-padding">
+          <div className="row">
+            <div className="col-sm">
+              <h2>Understand every step of the way</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                est tellus, pulvinar ac iaculis vel, varius eu arcu tor
+                vestibulum.
+              </p>
+            </div>
+            <div className="col-sm">
+              <h2>Build faster with instant answers</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                est tellus, pulvinar ac iaculis vel, varius eu arcu tor
+                vestibulum.
+              </p>
+            </div>
+            <div className="col-sm">
+              <h2>Unlock insights for everyone</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                est tellus, pulvinar ac iaculis vel, varius eu arcu tor
+                vestibulum.
+              </p>
+            </div>
           </div>
         </section>
       </article>
@@ -123,10 +162,12 @@ class Login extends Component {
 // props validation
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors
 });
 

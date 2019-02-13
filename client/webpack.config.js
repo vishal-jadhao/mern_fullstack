@@ -8,7 +8,8 @@ module.exports = {
   entry: ["./src/index.js"],
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/"
   },
   devServer: {
     contentBase: "build/", // Relative directory for base of server
@@ -69,7 +70,7 @@ module.exports = {
         use: "url-loader?limit=10000"
       },
       {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        test: /\.(otf|ttf|eot|svg)(\?[\s\S]+)?$/,
         use: "file-loader"
       },
       {

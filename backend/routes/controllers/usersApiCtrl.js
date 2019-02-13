@@ -115,7 +115,7 @@ const usersApiController = {
                   if (err) throw err;
                   res.json({
                     sucess: true,
-                    token: "Bearer " + token
+                    token: "bearer " + token
                   });
                 }
               );
